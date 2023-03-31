@@ -1,4 +1,20 @@
+use hello::greet;
+
 fn main() {
+
+    let result =  do_stuff(2.3,3.4);
+    println!("RESULT {}", result); 
+
+    greet();
+}
+
+
+fn do_stuff(qty: f64, oz: f64) -> f64{
+     qty * oz
+}
+
+
+fn previous(qty: f64, oz: f64) { 
 
     // VARIABLE
     println!("Hello, world!");
@@ -41,12 +57,5 @@ fn main() {
     }
     println!("{}", enigma);
 
-   let result =  do_stuff(2.3,3.4);
 
-    println!("RESULT {}", result); 
-}
-
-
-fn do_stuff(qty: f64, oz: f64) -> f64{
-     qty * oz
 }
