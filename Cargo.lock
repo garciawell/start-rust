@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "hello"
-version = "0.1.0"
+name = "variables-exercise"
+version = "2.3.4"
