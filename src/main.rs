@@ -3,7 +3,7 @@ fn main() {
     // VARIABLE
     println!("Hello, world!");
 
-    let number = 16;
+
 
     let mut cars = 2;
     cars = 34;
@@ -17,7 +17,7 @@ fn main() {
         let y = 99;
         println!("{}, {}", x, y)
     }
-    println!("{}, {}", x, y) // ERROR
+
 
     //SCOPE 2 
     let x = 5;
@@ -25,15 +25,12 @@ fn main() {
         let x = 99;
         println!("{}", x) // Prints 99
     }
-    println!("{}", x) // Prints 5
-
 
     // MEMORY SAFETY
     let enigma: i32;
     if true {
         enigma = 42;
     }
-    println!("{}", enigma) // ERROR you must to initialize variable
 
     ///////
     let enigma: i32;
@@ -42,6 +39,14 @@ fn main() {
     } else {
         enigma = 12; 
     }
-    println!("{}", enigma) // WORKED
+    println!("{}", enigma);
 
+   let result =  do_stuff(2.3,3.4);
+
+    println!("RESULT {}", result); 
+}
+
+
+fn do_stuff(qty: f64, oz: f64) -> f64{
+     qty * oz
 }
