@@ -28,4 +28,20 @@ fn main() {
     println!("{}", x) // Prints 5
 
 
+    // MEMORY SAFETY
+    let enigma: i32;
+    if true {
+        enigma = 42;
+    }
+    println!("{}", enigma) // ERROR you must to initialize variable
+
+    ///////
+    let enigma: i32;
+    if true {
+        enigma = 42;
+    } else {
+        enigma = 12; 
+    }
+    println!("{}", enigma) // WORKED
+
 }
