@@ -1,57 +1,75 @@
 // Silence some warnings so they don't distract from the exercise.
-#![allow(dead_code, unused_variables)]
-
-use hello::print_difference;
-use hello::print_array;
-use hello::ding;
-use hello::on_off;
+#![allow(dead_code, unused_mut, unused_variables)]
 
 fn main() {
-    let coords: (f32, f32) = (6.3, 15.0);
-    // 1. Pass parts of `coords` to the `print_difference` function. This should show the difference
-    // between the two numbers in coords when you do `cargo run`.  Use tuple indexing.
+    // This collects any command-line arguments into a vector of Strings.
+    // For example:
     //
-    // The `print_difference` function is defined below the `main` function. It may help if you look
-    // at how it is defined.
+    //     cargo run apple banana
     //
-    print_difference(coords.0, coords.1);   // Uncomment and finish this line
-
-
-    // 2. We want to use the `print_array` function to print coords...but coords isn't an array!
-    // Create an array of type [f32; 2] and initialize it to contain the
-    // information from coords.  Uncomment the print_array line and run the code.
+    // ...produces the equivalent of
     //
-    let coords_arr = [coords.0, coords.1];           // create an array literal out of parts of `coord` here
-    print_array(coords_arr);        // and pass it in here (this line doesn't need to change)
+    //     vec!["apple".to_string(), "banana".to_string()]
+    let args: Vec<String> = std::env::args().skip(1).collect();
+
+    // This consumes the `args` vector to iterate through each String
+    for arg in args {
+        if arg == "sum" {
+            sum()
+        } else if arg == "double" {
+            double()
+        } else {
+            count(arg)
+        }
+        // 1a. Your task: handle the command-line arguments!
+        //
+        // - If arg is "sum", then call the sum() function
+        // - If arg is "double", then call the double() function
+        // - If arg is anything else, then call the count() function, passing "arg" to it.
 
 
-    let series = [1, 1, 2, 3, 5, 8, 13];
-    // 3. Make the `ding` function happy by passing it the value 13 out of the `series` array.
-    // Use array indexing.  Done correctly, `cargo run` will produce the additional output
-    // "Ding, you found 13!"
+        // 1b. Now try passing "sum", "double" and "bananas" to the program by adding your argument
+        // after "cargo run".  For example "cargo run sum"
+    }
+}
+
+fn sum() {
+    let mut sum = 0;
+    // 2. Use a "for loop" to iterate through integers from 7 to 23 *inclusive* using a range
+    // and add them all together (increment the `sum` variable).  Hint: You should get 255
+    // Run it with `cargo run sum`
+
+    for i in 7..24 {
+        sum += i
+    }
+
+
+    println!("The sum is {}", sum);
+}
+
+fn double() {
+    let mut count = 0;
+    let mut x = 1;
+    // 3. Use a "while loop" to count how many times you can double the value of `x` (multiply `x`
+    // by 2) until `x` is larger than 500.  Increment `count` each time through the loop. Run it
+    // with `cargo run double`  Hint: The answer is 9 times.
+
+
+    while x < 500 {
+        count += 1;
+        x *= 2;
+    }
+    
+
+    println!("You can double x {} times until x is larger than 500", count);
+}
+
+fn count(arg: String) {
+    // Challenge: Use an unconditional loop (`loop`) to print `arg` 8 times, and then break.
+    // You will need to count your loops, somehow.  Run it with `cargo run bananas`
     //
-    ding(series[6]);
+    // print!("{} ", arg); // Execute this line 8 times, and then break. `print!` doesn't add a newline.
 
 
-    let mess = ([3, 2], 3.14, [(false, -3), (true, -100)], 5, "candy");
-    // 4. Pass the `on_off` function the value `true` from the variable `mess`.  Done correctly,
-    // `cargo run` will produce the additional output "Lights are on!" I'll get you started:
-    //
-    on_off(mess.2[1].0);
-
-    // 5.  What a mess -- functions in a binary! Let's get organized!
-    //
-    // - Make a library file (src/lib.rs)
-    // - Move all the functions (except main) into the library
-    // - Make all the functions public with `pub`
-    // - Bring all the functions into scope using use statements. Remember, the name of the library
-    //   is defined in Cargo.toml.  You'll need to know that to `use` it.
-    //
-    // `cargo run` should produce the same output, only now the code is more organized. 🎉
-
-    // Challenge: Uncomment the line below, run the code, and examine the
-    // output. Then go refactor the print_distance() function according to the
-    // instructions in the comments inside that function.
-
-    // print_distance(coords);
+    println!(); // This will output just a newline at the end for cleanliness.
 }
