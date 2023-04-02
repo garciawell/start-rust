@@ -1,61 +1,57 @@
-use hello::greet;
+// Silence some warnings so they don't distract from the exercise.
+#![allow(dead_code, unused_variables)]
+
+use hello::print_difference;
+use hello::print_array;
+use hello::ding;
+use hello::on_off;
 
 fn main() {
-
-    let result =  do_stuff(2.3,3.4);
-    println!("RESULT {}", result); 
-
-    greet();
-}
-
-
-fn do_stuff(qty: f64, oz: f64) -> f64{
-     qty * oz
-}
+    let coords: (f32, f32) = (6.3, 15.0);
+    // 1. Pass parts of `coords` to the `print_difference` function. This should show the difference
+    // between the two numbers in coords when you do `cargo run`.  Use tuple indexing.
+    //
+    // The `print_difference` function is defined below the `main` function. It may help if you look
+    // at how it is defined.
+    //
+    print_difference(coords.0, coords.1);   // Uncomment and finish this line
 
 
-fn previous(qty: f64, oz: f64) { 
-
-    // VARIABLE
-    println!("Hello, world!");
-
-
-
-    let mut cars = 2;
-    cars = 34;
-
-    const CAR_TEST: f64 = 9.8;
+    // 2. We want to use the `print_array` function to print coords...but coords isn't an array!
+    // Create an array of type [f32; 2] and initialize it to contain the
+    // information from coords.  Uncomment the print_array line and run the code.
+    //
+    let coords_arr = [coords.0, coords.1];           // create an array literal out of parts of `coord` here
+    print_array(coords_arr);        // and pass it in here (this line doesn't need to change)
 
 
-    // SCOPES
-    let x = 5;
-    {
-        let y = 99;
-        println!("{}, {}", x, y)
-    }
+    let series = [1, 1, 2, 3, 5, 8, 13];
+    // 3. Make the `ding` function happy by passing it the value 13 out of the `series` array.
+    // Use array indexing.  Done correctly, `cargo run` will produce the additional output
+    // "Ding, you found 13!"
+    //
+    ding(series[6]);
 
 
-    //SCOPE 2 
-    let x = 5;
-    {
-        let x = 99;
-        println!("{}", x) // Prints 99
-    }
+    let mess = ([3, 2], 3.14, [(false, -3), (true, -100)], 5, "candy");
+    // 4. Pass the `on_off` function the value `true` from the variable `mess`.  Done correctly,
+    // `cargo run` will produce the additional output "Lights are on!" I'll get you started:
+    //
+    on_off(mess.2[1].0);
 
-    // MEMORY SAFETY
-    let enigma: i32;
-    if true {
-        enigma = 42;
-    }
+    // 5.  What a mess -- functions in a binary! Let's get organized!
+    //
+    // - Make a library file (src/lib.rs)
+    // - Move all the functions (except main) into the library
+    // - Make all the functions public with `pub`
+    // - Bring all the functions into scope using use statements. Remember, the name of the library
+    //   is defined in Cargo.toml.  You'll need to know that to `use` it.
+    //
+    // `cargo run` should produce the same output, only now the code is more organized. 🎉
 
-    ///////
-    let enigma: i32;
-    if true {
-        enigma = 42;
-    } else {
-        enigma = 12; 
-    }
-    println!("{}", enigma);
+    // Challenge: Uncomment the line below, run the code, and examine the
+    // output. Then go refactor the print_distance() function according to the
+    // instructions in the comments inside that function.
 
-
+    // print_distance(coords);
 }
