@@ -1,11 +1,23 @@
 use hello::greet;
 
+trait Run {
+    fn run(&self) {
+        println!("I'm Running")
+    }
+}
+
+struct Robot{}
+
+impl Run for Robot {}
+
 fn main() {
 
     let result =  do_stuff(2.3,3.4);
     println!("RESULT {}", result); 
 
     greet();
+    let robot = Robot{};
+    robot.run();
 }
 
 
