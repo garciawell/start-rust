@@ -54,7 +54,7 @@ fn inspect(s: &String) {
     if s.ends_with("s") {
         return println!("PLURAL")
     }
-   return println!("SINGULAR")
+   return println!("SINGULARs")
 }
 
 fn change(s: &mut String) {
