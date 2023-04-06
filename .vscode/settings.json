@@ -1,6 +1,6 @@
 {
     "rust-analyzer.linkedProjects": [
-        "/exercise/e_ownership_references/Cargo.toml"
+        "/exercise/f_structs_traits/Cargo.toml"
     ],
     "rust-analyzer.showUnlinkedFileNotification": false
 }
