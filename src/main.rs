@@ -1,73 +1,18 @@
-use hello::greet;
+use std::error::Error;
+use rusty_audio::Audio;
 
-trait Run {
-    fn run(&self) {
-        println!("I'm Running")
-    }
-}
+fn main()  -> Result<(), Box<dyn Error>> {
+    let mut audio = Audio::new();
+    audio.add("explode", "explode.wav");
+    audio.add("lose", "lose.wav");
+    audio.add("move", "move.wav");
+    audio.add("pew", "pew.wav");
+    audio.add("startup", "startup.wav");
+    audio.add("win", "win.wav");
 
-struct Robot{}
+    audio.play("startup");
 
-impl Run for Robot {}
-
-fn main() {
-
-    let result =  do_stuff(2.3,3.4);
-    println!("RESULT {}", result); 
-
-    greet();
-    let robot = Robot{};
-    robot.run();
-}
-
-
-fn do_stuff(qty: f64, oz: f64) -> f64{
-     qty * oz
-}
-
-
-fn previous(qty: f64, oz: f64) { 
-
-    // VARIABLE
-    println!("Hello, world!");
-
-
-
-    let mut cars = 2;
-    cars = 34;
-
-    const CAR_TEST: f64 = 9.8;
-
-
-    // SCOPES
-    let x = 5;
-    {
-        let y = 99;
-        println!("{}, {}", x, y)
-    }
-
-
-    //SCOPE 2 
-    let x = 5;
-    {
-        let x = 99;
-        println!("{}", x) // Prints 99
-    }
-
-    // MEMORY SAFETY
-    let enigma: i32;
-    if true {
-        enigma = 42;
-    }
-
-    ///////
-    let enigma: i32;
-    if true {
-        enigma = 42;
-    } else {
-        enigma = 12; 
-    }
-    println!("{}", enigma);
-
-
+    // Cleanup
+    audio.wait();
+    Ok(())
 }
