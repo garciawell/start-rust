@@ -1,8 +1,9 @@
-use std::{time::Duration, cmp::max};
-
+use crate::{
+    frame::{Drawable, Frame},
+    {NUM_COLS, NUM_ROWS},
+};
 use rusty_time::timer::Timer;
-
-use crate::{NUM_COLS, NUM_ROWS, frame::{Drawable, Frame}};
+use std::{cmp::max, time::Duration};
 
 pub struct Invader {
     pub x: usize,
@@ -15,7 +16,7 @@ pub struct Invaders {
     direction: i32,
 }
 
-impl  Invaders {
+impl Invaders {
     pub fn new() -> Self {
         let mut army = Vec::new();
         for x in 0..NUM_COLS {
@@ -25,9 +26,10 @@ impl  Invaders {
                     && (y > 0)
                     && (y < 9)
                     && (x % 2 == 0)
-                    && (y % 2 == 0) {
-                        army.push(Invader { x, y});
-                    }
+                    && (y % 2 == 0)
+                {
+                    army.push(Invader { x, y});
+                }
             }
         }
         Self {
@@ -47,12 +49,12 @@ impl  Invaders {
                 if min_x == 0 {
                     self.direction = 1;
                     downwards = true;
-                } else {
-                    let max_x = self.army.iter().map(|invader| invader.x).max().unwrap_or(0);
-                    if max_x == NUM_COLS -1 {
-                        self.direction = - 1;
-                        downwards = true
-                    }
+                }
+            } else {
+                let max_x = self.army.iter().map(|invader| invader.x).max().unwrap_or(0);
+                if max_x == NUM_COLS - 1 {
+                    self.direction = -1;
+                    downwards = true;
                 }
             }
             if downwards {
@@ -66,7 +68,7 @@ impl  Invaders {
                     invader.x = ((invader.x as i32) + self.direction) as usize;
                 }
             }
-            return true
+            return true;
         }
         false
     }
@@ -76,11 +78,14 @@ impl  Invaders {
 impl Drawable for Invaders {
     fn draw(&self, frame: &mut Frame) {
         for invader in self.army.iter() {
-            frame[invader.x][invader.y] = if (self.move_timer.time_left.as_secs_f32() / self.move_timer.duration.as_secs_f32()) > 0.5 {
+            frame[invader.x][invader.y] = if (self.move_timer.time_left.as_secs_f32()
+                / self.move_timer.duration.as_secs_f32())
+                > 0.5
+            {
                 "x"
             } else {
                 "+"
-            };
+            }
         }
     }
 }
